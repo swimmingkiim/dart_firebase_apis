@@ -1046,7 +1046,7 @@
                                         "$ref": "RunAggregationQueryRequest"
                                     },
                                     "response": {
-                                        "$ref": "RunAggregationQueryResponse"
+                                        "$ref": "ListRunAggregationQueryResponse"
                                     },
                                     "scopes": [
                                         "https://www.googleapis.com/auth/cloud-platform",
@@ -2899,6 +2899,14 @@
                 }
             },
             "type": "object"
+        },
+        "ListRunAggregationQueryResponse": {
+            "description": "The response for Firestore.RunAggregationQuery.",
+            "id": "ListRunAggregationQueryResponse",
+            "items": {
+                "$ref": "RunAggregationQueryResponse"
+            },
+            "type": "array"
         },
         "RunQueryRequest": {
             "description": "The request for Firestore.RunQuery.",

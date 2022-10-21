@@ -1474,6 +1474,20 @@ void checkListLocationsResponse(api.ListLocationsResponse o) {
   buildCounterListLocationsResponse--;
 }
 
+api.ListRunAggregationQueryResponse buildListRunAggregationQueryResponse() {
+  final o = api.ListRunAggregationQueryResponse();
+  o.add(buildRunAggregationQueryResponse());
+  o.add(buildRunAggregationQueryResponse());
+  return o;
+}
+
+void checkListRunAggregationQueryResponse(
+    api.ListRunAggregationQueryResponse o) {
+  unittest.expect(o, unittest.hasLength(2));
+  checkRunAggregationQueryResponse(o[0]);
+  checkRunAggregationQueryResponse(o[1]);
+}
+
 core.Map<core.String, core.String> buildUnnamed27() => {
       'x': 'foo',
       'y': 'foo',
@@ -2915,6 +2929,16 @@ void main() {
       final od = api.ListLocationsResponse.fromJson(
           oJson as core.Map<core.String, core.dynamic>);
       checkListLocationsResponse(od);
+    });
+  });
+
+  unittest.group('obj-schema-ListRunAggregationQueryResponse', () {
+    unittest.test('to-json--from-json', () async {
+      final o = buildListRunAggregationQueryResponse();
+      final oJson = convert.jsonDecode(convert.jsonEncode(o));
+      final od =
+          api.ListRunAggregationQueryResponse.fromJson(oJson as core.List);
+      checkListRunAggregationQueryResponse(od);
     });
   });
 
@@ -4828,13 +4852,14 @@ void main() {
         final h = {
           'content-type': 'application/json; charset=utf-8',
         };
-        final resp = convert.json.encode(buildRunAggregationQueryResponse());
+        final resp =
+            convert.json.encode(buildListRunAggregationQueryResponse());
         return async.Future.value(stringResponse(200, h, resp));
       }), true);
       final response = await res.runAggregationQuery(arg_request, arg_parent,
           $fields: arg_$fields);
-      checkRunAggregationQueryResponse(
-          response as api.RunAggregationQueryResponse);
+      checkListRunAggregationQueryResponse(
+          response as api.ListRunAggregationQueryResponse);
     });
 
     unittest.test('method--runQuery', () async {

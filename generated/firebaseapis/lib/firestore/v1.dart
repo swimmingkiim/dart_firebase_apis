@@ -32,6 +32,7 @@
 library firestore.v1;
 
 import 'dart:async' as async;
+import 'dart:collection' as collection;
 import 'dart:convert' as convert;
 import 'dart:core' as core;
 
@@ -1425,14 +1426,14 @@ class ProjectsDatabasesDocumentsResource {
   /// [$fields] - Selector specifying which fields to include in a partial
   /// response.
   ///
-  /// Completes with a [RunAggregationQueryResponse].
+  /// Completes with a [ListRunAggregationQueryResponse].
   ///
   /// Completes with a [commons.ApiRequestError] if the API endpoint returned an
   /// error.
   ///
   /// If the used [http.Client] completes with an error when making a REST call,
   /// this method will complete with the same error.
-  async.Future<RunAggregationQueryResponse> runAggregationQuery(
+  async.Future<ListRunAggregationQueryResponse> runAggregationQuery(
     RunAggregationQueryRequest request,
     core.String parent, {
     core.String? $fields,
@@ -1451,8 +1452,7 @@ class ProjectsDatabasesDocumentsResource {
       body: _body,
       queryParams: _queryParams,
     );
-    return RunAggregationQueryResponse.fromJson(
-        _response as core.Map<core.String, core.dynamic>);
+    return ListRunAggregationQueryResponse.fromJson(_response as core.List);
   }
 
   /// Runs a query.
@@ -3411,6 +3411,41 @@ class ListLocationsResponse {
         if (locations != null) 'locations': locations!,
         if (nextPageToken != null) 'nextPageToken': nextPageToken!,
       };
+}
+
+/// The response for Firestore.RunAggregationQuery.
+class ListRunAggregationQueryResponse
+    extends collection.ListBase<RunAggregationQueryResponse> {
+  final core.List<RunAggregationQueryResponse> _inner;
+
+  ListRunAggregationQueryResponse() : _inner = [];
+
+  ListRunAggregationQueryResponse.fromJson(core.List json)
+      : _inner = json
+            .map((value) => RunAggregationQueryResponse.fromJson(
+                value as core.Map<core.String, core.dynamic>))
+            .toList();
+
+  @core.override
+  RunAggregationQueryResponse operator [](core.int key) => _inner[key];
+
+  @core.override
+  void operator []=(core.int key, RunAggregationQueryResponse value) {
+    _inner[key] = value;
+  }
+
+  @core.override
+  core.int get length => _inner.length;
+
+  @core.override
+  set length(core.int newLength) {
+    _inner.length = newLength;
+  }
+
+  @core.override
+  void add(RunAggregationQueryResponse element) {
+    _inner.add(element);
+  }
 }
 
 /// A resource that represents Google Cloud Platform location.
